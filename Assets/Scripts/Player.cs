@@ -32,10 +32,25 @@ public class Player : MonoBehaviour
     float yMin;
     float yMax;
 
+
+    public GameObject shieldGO;
+    public bool onShield;
+    private float shieldTime;
+
     // Start is called before the first frame update
     void Start()
     {
         SetupMoveBoundaries();
+    }
+
+    private void ChangeShieldStatus(bool enableShield, float shieldTime)
+    {
+        onShield = enableShield;
+        shieldGO.SetActive(onShield);
+        if (enableShield)
+        {
+            this.shieldTime += shieldTime;
+        }
     }
 
     // Update is called once per frame
@@ -43,6 +58,19 @@ public class Player : MonoBehaviour
     {
         Move();
         Fire();
+        ShieldUpdate();
+    }
+
+    void ShieldUpdate()
+    {
+        if (onShield)
+        {
+            shieldTime -= Time.deltaTime;
+            if (shieldTime <= 0)
+            {
+                ChangeShieldStatus(false,0);
+            }
+        }
     }
 
     IEnumerator FireAtWill()
@@ -76,14 +104,27 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        IShieldItem shieldItem = collision.gameObject.GetComponent<IShieldItem>();
+        if (shieldItem!=null)
+        {
+            float shieldTime = shieldItem.GetShieldTime();
+            ChangeShieldStatus(true,shieldTime);
+            shieldItem.Hide();
+            return;
+        }
+        
         DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
 
-        if (damageDealer)
+        if (damageDealer!=null)
         {
+            if(onShield) return;
             TakeDamage(damageDealer.GetDamage());
 
             damageDealer.Hit();
         }
+        
+        
+        
 
     }
 

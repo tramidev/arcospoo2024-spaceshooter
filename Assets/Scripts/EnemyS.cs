@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyS : Enemy
+public class EnemyS : Enemy, IShieldItem
 {
     public int horizontalMovementSpeed;
     private int direction = -1;
     private float maxXPos;
     private float minXPos;
+
+    public float shieldTimeToGive = 2;
 
     public void Awake()
     {
@@ -44,5 +46,16 @@ public class EnemyS : Enemy
         }
 
         transform.position += positionDelta*horizontalMovementSpeed;
+    }
+
+    public float GetShieldTime()
+    {
+        return shieldTimeToGive;
+    }
+
+    public void Hide()
+    {
+        health = 0;
+        TakeDamage(100);
     }
 }
