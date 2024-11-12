@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3419908120083494526}
   - component: {fileID: 3419908120083494527}
   - component: {fileID: 5554154993605680251}
-  - component: {fileID: 7333573752806390060}
   - component: {fileID: -6959380799900704591}
   - component: {fileID: 9125307025657809886}
+  - component: {fileID: 8587874037848047260}
   m_Layer: 9
   m_Name: EnemyS
   m_TagString: EnemySmall
@@ -134,28 +134,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.28086329}
   m_EdgeRadius: 0
---- !u!114 &7333573752806390060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3419908120083494520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a03a5e4c3751a643b06becfd5b218f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  shotCounter: 0
-  minTimeBetweenShots: 0.2
-  maxTimeBetweenShots: 1.5
-  audioSource: {fileID: -6959380799900704591}
-  shootSound: {fileID: 8300000, guid: c0a2813d7422c6144a1c68cabd7dc08f, type: 3}
-  shootSoundVolume: 0.5
-  EnemyLaser: {fileID: 6803498458253790993, guid: 8de9e33b96ff5b44d9dae3317804424a,
-    type: 3}
-  HitFX: {fileID: 6826884493935400440, guid: 463c2561591a6ff438c7f84ad44bd030, type: 3}
 --- !u!82 &-6959380799900704591
 AudioSource:
   m_ObjectHideFlags: 0
@@ -265,6 +243,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 100
-  effectTagName: HitFX
   objectEffect: {fileID: 7979616569856727185, guid: b67972a1b78ec974593e15eeb29e6eaf,
     type: 3}
+--- !u!114 &8587874037848047260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3419908120083494520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a73351289247d94dab1d940baf801a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  shotCounter: 0
+  minTimeBetweenShots: 0.2
+  maxTimeBetweenShots: 3
+  moveForwardSpeed: 0.7
+  audioSource: {fileID: -6959380799900704591}
+  shootSound: {fileID: 8300000, guid: c0a2813d7422c6144a1c68cabd7dc08f, type: 3}
+  shootSoundVolume: 0.5
+  EnemyLaser: {fileID: 6803498458253790993, guid: 8de9e33b96ff5b44d9dae3317804424a,
+    type: 3}
+  HitFX: {fileID: 6826884493935400440, guid: 463c2561591a6ff438c7f84ad44bd030, type: 3}
+  horizontalMovementSpeed: 0

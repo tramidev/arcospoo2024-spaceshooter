@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public float shotCounter;
     public float minTimeBetweenShots = 0.2f;
     public float maxTimeBetweenShots = 3f;
+    public float moveForwardSpeed = 2f;
 
     [Header("Audio Source")]
     public AudioSource audioSource;
@@ -18,6 +19,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject EnemyLaser;
     public GameObject HitFX;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +28,18 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
+        MoveForward();
         CountDownToShoot();
     }
 
-    private void CountDownToShoot()
+    private void MoveForward()
+    {
+        transform.position += Vector3.down * (Time.deltaTime * moveForwardSpeed);
+    }
+
+    protected void CountDownToShoot()
     {
         shotCounter -= Time.deltaTime;
         if ( shotCounter <= 0f)
